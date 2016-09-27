@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      并查集 | Criska 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="criska">
+    
+    
+
+    <meta name="description" content="做了这么多套题，发现并查集的比例还是挺高的，但是我掌握的很不好orz，所以写一篇博客来熟悉一下并查集
+并查集并查集主要应用与判断两个元素是否处于同一个集合中，以及将新的元素加入集合中之类之类这样类似的问题。那么从一开始，用father[x]记录x的父亲（意思即为x和它的父亲处于同一个集合中）。123scanf(&quot;%d%d&quot;,&amp;amp;n,&amp;amp;m);for(int i=1;i&amp;lt;=n;++">
+<meta property="og:type" content="article">
+<meta property="og:title" content="并查集 | Criska">
+<meta property="og:url" content="http://yoursite.com/2016/09/27/并查集/index.html">
+<meta property="og:site_name" content="Criska">
+<meta property="og:description" content="做了这么多套题，发现并查集的比例还是挺高的，但是我掌握的很不好orz，所以写一篇博客来熟悉一下并查集
+并查集并查集主要应用与判断两个元素是否处于同一个集合中，以及将新的元素加入集合中之类之类这样类似的问题。那么从一开始，用father[x]记录x的父亲（意思即为x和它的父亲处于同一个集合中）。123scanf(&quot;%d%d&quot;,&amp;amp;n,&amp;amp;m);for(int i=1;i&amp;lt;=n;++">
+<meta property="og:image" content="http://yoursite.com/\images\mxcp2744.png">
+<meta property="og:updated_time" content="2016-09-27T12:10:52.721Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="并查集 | Criska">
+<meta name="twitter:description" content="做了这么多套题，发现并查集的比例还是挺高的，但是我掌握的很不好orz，所以写一篇博客来熟悉一下并查集
+并查集并查集主要应用与判断两个元素是否处于同一个集合中，以及将新的元素加入集合中之类之类这样类似的问题。那么从一开始，用father[x]记录x的父亲（意思即为x和它的父亲处于同一个集合中）。123scanf(&quot;%d%d&quot;,&amp;amp;n,&amp;amp;m);for(int i=1;i&amp;lt;=n;++">
+<meta name="twitter:image" content="http://yoursite.com/\images\mxcp2744.png">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/2.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Criska</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">并查集</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-09-27" class="post-meta__date date">2016-09-27</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/并查集/">并查集</a>
+            </font>
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/并查集/">并查集</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>做了这么多套题，发现并查集的比例还是挺高的，但是我掌握的很不好orz，所以写一篇博客来熟悉一下并查集</p>
+<h1 id="并查集"><a href="#并查集" class="headerlink" title="并查集"></a>并查集</h1><p>并查集主要应用与判断两个元素是否处于同一个集合中，以及将新的元素加入集合中之类之类这样类似的问题。<br>那么从一开始，用father[x]记录x的父亲（意思即为x和它的父亲处于同一个集合中）。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</div><div class="line">	father[i]=i;</div></pre></td></tr></table></figure></p>
+<p>而且为了降低时间复杂度，我们要对元素进行路径压缩，就是让集合中的所有儿子指向同一个父亲。<br><img src="\images\mxcp2744.png" alt=""></p>
+<h1 id="判断元素是否处于同一个集合中"><a href="#判断元素是否处于同一个集合中" class="headerlink" title="判断元素是否处于同一个集合中"></a>判断元素是否处于同一个集合中</h1><ul>
+<li>简单来说我们只需要判断两个元素的父亲是不是一样的，就可以判断他们在不在同一个集合中。<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(x)</span><span class="comment">//使用递归，并且进行路径压缩</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(father[x]!=x)</div><div class="line">	father[x]=find(father[x]);</div><div class="line">	<span class="keyword">return</span> father[x];</div><div class="line">&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;++i)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;x,&amp;y);</div><div class="line">		<span class="keyword">int</span> r1=find(x);</div><div class="line">		<span class="keyword">int</span> r2=find(y);</div><div class="line">		<span class="keyword">if</span>(r1!=r2) <span class="built_in">printf</span>(<span class="string">"NO/n"</span>);</div><div class="line">		<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"YES/n"</span>);</div><div class="line">		</div><div class="line">	&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h1 id="将新的元素加入集合中"><a href="#将新的元素加入集合中" class="headerlink" title="将新的元素加入集合中"></a>将新的元素加入集合中</h1><p>首先进行判断，若x和y的父亲一样，那显然没必要进行更新。如果不一样，那么只需要将x的父亲指向y的父亲就可以了，意思就是x的父亲的父亲是y的父亲<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">un</span><span class="params">(<span class="keyword">int</span> r1,<span class="keyword">int</span> r2)</span></span></div><div class="line">&#123;</div><div class="line">	father[r2]=r1;</div><div class="line">&#125;</div><div class="line"></div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;++i)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;x,&amp;y);</div><div class="line">		<span class="keyword">int</span> r1=find(x);</div><div class="line">		<span class="keyword">int</span> r2=find(y);</div><div class="line">		<span class="keyword">if</span>(r1!=r2) un(r1,r2);</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<h1 id="【模板】并查集"><a href="#【模板】并查集" class="headerlink" title="【模板】并查集"></a><a href="http://www.luogu.org/problem/show?pid=3367" target="_blank" rel="external">【模板】并查集</a></h1><p>仍然是洛谷上一道并查集的裸题，附上代码<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">int</span> n,m,father[<span class="number">20000</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">un</span><span class="params">(<span class="keyword">int</span> r1,<span class="keyword">int</span> r2)</span></span></div><div class="line">&#123;</div><div class="line">	father[r2]=r1;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">find</span><span class="params">(<span class="keyword">int</span> x)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(father[x]!=x)</div><div class="line">	father[x]=find(father[x]);</div><div class="line">	<span class="keyword">return</span> father[x];</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;n,&amp;m);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</div><div class="line">		father[i]=i;</div><div class="line">	<span class="keyword">int</span> k,x,y;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=m;++i)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>,&amp;k,&amp;x,&amp;y);</div><div class="line">		<span class="keyword">int</span> r1=find(x);</div><div class="line">		<span class="keyword">int</span> r2=find(y);			</div><div class="line">		<span class="keyword">if</span>(k==<span class="number">1</span>)</div><div class="line">		&#123;</div><div class="line"></div><div class="line">			<span class="keyword">if</span>(r1!=r2) un(r1,r2);		</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">else</span></div><div class="line">		&#123;</div><div class="line">			<span class="keyword">if</span>(r1!=r2) <span class="built_in">printf</span>(<span class="string">"N\n"</span>);</div><div class="line">			<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"Y\n"</span>);			</div><div class="line">		&#125;</div><div class="line"></div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
