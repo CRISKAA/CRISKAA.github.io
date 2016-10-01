@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      RMQ（ST算法） | Criska 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="criska">
+    
+    
+
+    <meta name="description" content="RMQ (Range Minimum/Maximum Query)问题是指：对于长度为n的数列A，回答若干询问RMQ(A,i,j)(i,j&amp;lt;=n)，返回数列A中下标在i,j里的最小(大）值，也就是说，RMQ问题是指求区间最值的问题。
+求区间最值最常用的是线段树（至少我是），但是今天学会了一个新的算法，写一篇博客纪念一下
+
+
+方法：ST算法分成两部分：离线预处理 （nlogn）和 在线查询（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RMQ（ST算法） | Criska">
+<meta property="og:url" content="http://yoursite.com/2016/10/01/RMQ（ST算法）/index.html">
+<meta property="og:site_name" content="Criska">
+<meta property="og:description" content="RMQ (Range Minimum/Maximum Query)问题是指：对于长度为n的数列A，回答若干询问RMQ(A,i,j)(i,j&amp;lt;=n)，返回数列A中下标在i,j里的最小(大）值，也就是说，RMQ问题是指求区间最值的问题。
+求区间最值最常用的是线段树（至少我是），但是今天学会了一个新的算法，写一篇博客纪念一下
+
+
+方法：ST算法分成两部分：离线预处理 （nlogn）和 在线查询（">
+<meta property="og:updated_time" content="2016-10-01T08:54:57.819Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RMQ（ST算法） | Criska">
+<meta name="twitter:description" content="RMQ (Range Minimum/Maximum Query)问题是指：对于长度为n的数列A，回答若干询问RMQ(A,i,j)(i,j&amp;lt;=n)，返回数列A中下标在i,j里的最小(大）值，也就是说，RMQ问题是指求区间最值的问题。
+求区间最值最常用的是线段树（至少我是），但是今天学会了一个新的算法，写一篇博客纪念一下
+
+
+方法：ST算法分成两部分：离线预处理 （nlogn）和 在线查询（">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/2.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Criska</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">RMQ（ST算法）</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-10-01" class="post-meta__date date">2016-10-01</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/ST/">ST</a>, <a class="categories-link" href="/categories/ST/RMQ/">RMQ</a>
+            </font>
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/RMQ/">RMQ</a>, <a class="tags-link" href="/tags/ST/">ST</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <ul>
+<li>RMQ (Range Minimum/Maximum Query)问题是指：对于长度为n的数列A，回答若干询问RMQ(A,i,j)(i,j&lt;=n)，返回数列A中下标在i,j里的最小(大）值，也就是说，RMQ问题是指求区间最值的问题。</li>
+<li>求区间最值最常用的是线段树（至少我是），但是今天学会了一个新的算法，写一篇博客纪念一下</li>
+</ul>
+<hr>
+<p>方法：ST算法分成两部分：离线预处理 （nlogn）和 在线查询（O(1)）。虽然还可以使用线段树、树状链表等求解区间最值，<strong> 但是ST算法要比它们更快</strong>，而且适用于在线查询。</p>
+<ul>
+<li>1）离线预处理：运用DP思想，用于求解区间最值，并保存到一个二维数组中。</li>
+<li>2）在线查询：对给定区间进行分割，借助该二维数组求最值。</li>
+</ul>
+<hr>
+<h2 id="（1）离线预处理："><a href="#（1）离线预处理：" class="headerlink" title="（1）离线预处理："></a>（1）离线预处理：</h2><ul>
+<li>ST算法使用DP思想求解区间最值，貌似属于区间动态规划，不过区间在增加时，每次并不是增加一个长度，而是使用倍增的思想，每次增加2^i个长度。</li>
+<li>使用F[i,j]表示以i为起点，区间长度为2^j的区间最值，此时区间为[i,i + 2^j - 1]。</li>
+<li>比如，F[0,2]表示区间[0,3]的最小值，即等于4，F[2,2]表示区间[2,5]的最小值，即等于1。</li>
+<li>在求解F[i,j]时，ST算法是先对长度为2^j的区间[i,i + 2^j - 1]分成两等份，每份长度均为2^(j - 1)。之后在分别求解这两个区间的最值F[i,j - 1]和F[i + 2^(j - 1),j - 1]。最后在结合这两个区间的最值，求出整个区间的最值。特殊情况，当j = 0时，区间长度等于0，即区间中只有一个元素，此时F[i,0]应等于每一个元素的值。</li>
+</ul>
+<p><strong>举例：</strong>要求解F[1,2]的值，即求解区间[1,4] = {4,6,10,1}的最小值，此时需要把这个区间分成两个等长的区间，即为[1,2]和[3,4]，之后分别求解这两个区间的最小值。此时这两个区间最小值分别对应着F[1,1] 和 F[3,1]的值。</p>
+<p><strong>状态转移方程是 F[i,j] = min(F[i,j - 1],F[i + 2^(j - 1),j - 1])<br>初始状态为：F[i,0] = A[i]。</strong></p>
+<p>在根据状态转移方程递推时，是对每一元素，先求区间长度为1的区间最值，之后再求区间长度为2的区间最值，之后再求区间长度为4的区间最值….，最后，对每一个元素，在求解区间长度为log2^n的区间最值后，算法结束，其中n表示元素个数。<br>即：先求F[0][1]，F[1][1]，F[2][1]，F[3][1]，,，F[n][1]，再求.F[0][2]，F[1][2]，F[2][2]，F[3][2]，,，F[m][2]，… 。</p>
+<h2 id="（2）在线处理："><a href="#（2）在线处理：" class="headerlink" title="（2）在线处理："></a>（2）在线处理：</h2><ul>
+<li>这里我们是已知待查询的区间[x,y]，求解其最值。</li>
+<li>在预处理期间，每一个状态对应的区间长度都为2^i。由于给出的待查询区间长度不一定恰好为2^i，因此我们应对待查询的区间进行处理。</li>
+<li>这里我们把待查询的区间分成两个小区间，这两个小区间满足两个条件：（1）这两个小区间要能覆盖整个区间（2）为了利用预处理的结果，要求小区间长度相等且都为2^i。<strong>注意两个小区间可能重叠。</strong></li>
+</ul>
+<p><strong>举例：</strong>待查询的区间为[3,11]，先尽量等分两个区间，则先设置为[3,7]和[8,11]。之后再扩大这两个区间，让其长度都等于为2^i。刚划分的两个区间长度分别为5和4，之后继续增加区间长度，直到其成为2^i。此时满足两个条件的最小区间长度为8,此时i = 3。<br>在程序计算求解区间长度时，并没有那么麻烦，我们可以直接得到i，即等于直接对区间长度取以2为底的对数。这里，对于区间[3,11]，其分解的区间长度为int（log(11 - 3 + 1)） = 3，这里log是以2为底的。</p>
+<ul>
+<li>根据上述思想，可以把待查询区间[x，y]分成两个小区间[x，x + 2^i - 1] 和 [y - 2^i + 1，y] ，其又分别对应着F[x,i]和F[y - 2^i + 1,i]，此时为了求解整个区间的最小值，我们只需求这两个值得最小值即可，此时复杂度是O(1)。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">20001</span>,M=<span class="number">21</span>;</div><div class="line"><span class="keyword">int</span> f[N][M],n,a[N],x,ans,st,ed,m;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">minn</span><span class="params">(<span class="keyword">int</span> x,<span class="keyword">int</span> y)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(x&gt;y) <span class="keyword">return</span> y;</div><div class="line">	<span class="keyword">else</span> <span class="keyword">return</span> x;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">yuchuli</span><span class="params">()</span><span class="comment">//首先利用倍增的思想对所有数进行预处理</span></span></div><div class="line">&#123;</div><div class="line">	x=(<span class="keyword">int</span>)(<span class="built_in">log</span>(<span class="keyword">double</span>(n))/<span class="built_in">log</span>(<span class="number">2.0</span>));</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=x;++j)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">if</span>(i+(<span class="number">1</span>&lt;&lt;j)<span class="number">-1</span>&lt;=n)</div><div class="line">			f[i][j]=minn(f[i][j<span class="number">-1</span>],f[i+(<span class="number">1</span>&lt;&lt;(j<span class="number">-1</span>))][j<span class="number">-1</span>]);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">rmq</span><span class="params">(<span class="keyword">int</span> st,<span class="keyword">int</span> ed)</span><span class="comment">//直接求出[st,ed]区间内的最小值即可</span></span></div><div class="line">&#123;</div><div class="line">	x=(<span class="keyword">int</span>)(<span class="built_in">log</span>(<span class="keyword">double</span>(ed-st+<span class="number">1</span>))/<span class="built_in">log</span>(<span class="number">2.0</span>));</div><div class="line">	<span class="keyword">return</span> ans=minn(f[st][x],f[ed-(<span class="number">1</span>&lt;&lt;x)+<span class="number">1</span>][x]);	</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;a[i]);</div><div class="line">		f[i][<span class="number">0</span>]=a[i];</div><div class="line">	&#125;</div><div class="line">	yuchuli();	</div><div class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;st,&amp;ed);</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>,rmq(st,ed));</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="【例题】求m区间内的最小值"><a href="#【例题】求m区间内的最小值" class="headerlink" title="【例题】求m区间内的最小值"></a><a href="http://www.luogu.org/problem/show?pid=1440" target="_blank" rel="external">【例题】求m区间内的最小值</a></h1><p>洛谷上的一道题，但是不能ac…………因为它是针对单调队列的所以RMQ爆空间了= =但是还是可以拿来练练手的，数据范围定小一点大概可以过5个点</p>
+
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
