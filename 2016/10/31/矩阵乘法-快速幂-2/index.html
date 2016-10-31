@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    
+
+    <title>
+      矩阵乘法+快速幂 | Criska 
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    
+      <meta name="author" content="criska">
+    
+    
+
+    <meta name="description" content="*MDZZ…………难写死了QAQ………………不过矩阵乘法挺好理解的，总的来说，就是省略了中间递推的过程，直接通过快速幂得到最终的答案，时间复杂度为O（logn），具体原理如下：
+
+【例题】小M 玩数列【问题描述】小W 发现了一个神奇的数列：f(n) = f(n − 1) + f(n − 2) ｛􀀂n≥ 3, n(1) = 1, n(2) = 1｝，这就是著名的 FibonacciSequence">
+<meta property="og:type" content="article">
+<meta property="og:title" content="矩阵乘法+快速幂 | Criska">
+<meta property="og:url" content="http://yoursite.com/2016/10/31/矩阵乘法-快速幂-2/index.html">
+<meta property="og:site_name" content="Criska">
+<meta property="og:description" content="*MDZZ…………难写死了QAQ………………不过矩阵乘法挺好理解的，总的来说，就是省略了中间递推的过程，直接通过快速幂得到最终的答案，时间复杂度为O（logn），具体原理如下：
+
+【例题】小M 玩数列【问题描述】小W 发现了一个神奇的数列：f(n) = f(n − 1) + f(n − 2) ｛􀀂n≥ 3, n(1) = 1, n(2) = 1｝，这就是著名的 FibonacciSequence">
+<meta property="og:image" content="http://yoursite.com/\images\2.jpg">
+<meta property="og:image" content="http://yoursite.com/\images\3.jpg">
+<meta property="og:updated_time" content="2016-10-31T13:19:00.218Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="矩阵乘法+快速幂 | Criska">
+<meta name="twitter:description" content="*MDZZ…………难写死了QAQ………………不过矩阵乘法挺好理解的，总的来说，就是省略了中间递推的过程，直接通过快速幂得到最终的答案，时间复杂度为O（logn），具体原理如下：
+
+【例题】小M 玩数列【问题描述】小W 发现了一个神奇的数列：f(n) = f(n − 1) + f(n − 2) ｛􀀂n≥ 3, n(1) = 1, n(2) = 1｝，这就是著名的 FibonacciSequence">
+<meta name="twitter:image" content="http://yoursite.com/\images\2.jpg">
+    
+    
+    
+      <link rel="icon" type="image/x-icon" href="/2.ico">
+    
+    <link rel="stylesheet" href="/css/uno.css">
+    <link rel="stylesheet" href="/css/highlight.css">
+    <link rel="stylesheet" href="/css/archive.css">
+    <link rel="stylesheet" href="/css/china-social-icon.css">
+
+</head>
+<body>
+
+    <span class="mobile btn-mobile-menu">
+        <i class="icon icon-list btn-mobile-menu__icon"></i>
+        <i class="icon icon-x-circle btn-mobile-close__icon hidden"></i>
+    </span>
+
+    
+
+<header class="panel-cover panel-cover--collapsed">
+
+
+  <div class="panel-main">
+
+  
+    <div class="panel-main__inner panel-inverted">
+    <div class="panel-main__content">
+
+        
+
+        <h1 class="panel-cover__title panel-title"><a href="/" title="link to homepage">Criska</a></h1>
+        <hr class="panel-cover__divider" />
+
+        
+
+        <div class="navigation-wrapper">
+
+          <nav class="cover-navigation cover-navigation--primary">
+            <ul class="navigation">
+
+              
+                
+                <li class="navigation__item"><a href="/#blog" title="" class="blog-button">首页</a></li>
+              
+                
+                <li class="navigation__item"><a href="/about" title="" class="">关于</a></li>
+              
+                
+                <li class="navigation__item"><a href="/archive" title="" class="">归档</a></li>
+              
+
+            </ul>
+          </nav>
+
+          <!-- ----------------------------
+To add a new social icon simply duplicate one of the list items from below
+and change the class in the <i> tag to match the desired social network
+and then add your link to the <a>. Here is a full list of social network
+classes that you can use:
+
+    icon-social-500px
+    icon-social-behance
+    icon-social-delicious
+    icon-social-designer-news
+    icon-social-deviant-art
+    icon-social-digg
+    icon-social-dribbble
+    icon-social-facebook
+    icon-social-flickr
+    icon-social-forrst
+    icon-social-foursquare
+    icon-social-github
+    icon-social-google-plus
+    icon-social-hi5
+    icon-social-instagram
+    icon-social-lastfm
+    icon-social-linkedin
+    icon-social-medium
+    icon-social-myspace
+    icon-social-path
+    icon-social-pinterest
+    icon-social-rdio
+    icon-social-reddit
+    icon-social-skype
+    icon-social-spotify
+    icon-social-stack-overflow
+    icon-social-steam
+    icon-social-stumbleupon
+    icon-social-treehouse
+    icon-social-tumblr
+    icon-social-twitter
+    icon-social-vimeo
+    icon-social-xbox
+    icon-social-yelp
+    icon-social-youtube
+    icon-social-zerply
+    icon-mail
+
+-------------------------------->
+
+<!-- add social info here -->
+
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="panel-cover--overlay"></div>
+  </div>
+</header>
+
+    <div class="content-wrapper">
+        <div class="content-wrapper__inner entry">
+            
+
+<article class="post-container post-container--single">
+
+  <header class="post-header">
+    
+    <h1 class="post-title">矩阵乘法+快速幂</h1>
+
+    
+
+    <div class="post-meta">
+      <time datetime="2016-10-31" class="post-meta__date date">2016-10-31</time> 
+
+      <span class="post-meta__tags tags">
+
+          
+            <font class="categories">
+            &#8226; 分类:
+            <a class="categories-link" href="/categories/矩阵乘法/">矩阵乘法</a>
+            </font>
+          
+
+          
+             &#8226; 标签:
+            <font class="tags">
+              <a class="tags-link" href="/tags/矩阵乘法/">矩阵乘法</a>
+            </font>
+          
+
+      </span>
+    </div>
+    
+    
+
+  </header>
+
+  <section id="post-content" class="article-content post">
+    <p>*MDZZ…………难写死了QAQ………………<br>不过矩阵乘法挺好理解的，总的来说，就是省略了中间递推的过程，直接通过快速幂得到最终的答案，时间复杂度为O（logn），具体原理如下：</p>
+<p><img src="\images\2.jpg" alt=""><br><img src="\images\3.jpg" alt=""></p>
+<h1 id="【例题】小M-玩数列"><a href="#【例题】小M-玩数列" class="headerlink" title="【例题】小M 玩数列"></a>【例题】小M 玩数列</h1><p>【问题描述】<br>小W 发现了一个神奇的数列：<br>f(n) = f(n − 1) + f(n − 2) ｛􀀂n≥ 3, n(1) = 1, n(2) = 1｝，这就是著名的 Fibonacci<br>Sequence = =!。<br>众所周知，小M 的数学超级超级好，于是给小W 出了一道题：<br>给小W 两个数X,Y,其中 X ≤ Y≤ 2^31−1。<br>小W 任务就是求出 Fibonacci 数列第X~Y 项的和除以10000 的余数。<br>然而小W 是数学战五渣，于是只能把这个任务交给机智的你啦。<br>【输入格式】<br>第一行一个整数T，表示数据组数。<br>接下来T 行，每行两个数X,Y，意义如题所述。<br>【输出格式】<br>T 行，每行是一个询问的答案。<br>【输入输出样例】<br>fibonacci.in<br>2<br>1 5<br>127 255</p>
+<p> fibonacci.out<br>12<br>5976<br>【数据规模】<br>对于80%的数据：T=1，Y&lt;=10^6<br>对于100%的数据：T&lt;=1000,Y&lt;=2^31-1</p>
+<hr>
+<ul>
+<li>这道题就是很裸的矩阵乘法啦，不过唯一要注意的是，对于斐波那契数列，S(N)=F(N+2)-1，这样就会快很多了。</li>
+</ul>
+<p>附上代码：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">int</span> t;</div><div class="line"><span class="keyword">long</span> <span class="keyword">long</span> x,y,st,ed,sum;</div><div class="line"><span class="keyword">long</span> <span class="keyword">long</span> X[<span class="number">3</span>][<span class="number">3</span>],A[<span class="number">3</span>][<span class="number">3</span>]=&#123;&#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;,&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>&#125;,&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>&#125;&#125;,</div><div class="line">                  N[<span class="number">3</span>][<span class="number">3</span>]=&#123;&#123;<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>&#125;,&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>&#125;,&#123;<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>&#125;&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">cheng</span><span class="params">(<span class="keyword">int</span> x)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">2</span>;++i)</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=<span class="number">2</span>;++j)	</div><div class="line">			X[i][j]=<span class="number">0</span>;<span class="comment">//不要忘记清零和初始化数组 </span></div><div class="line">	<span class="keyword">if</span>(x==<span class="number">0</span>)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">2</span>;++i)</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=<span class="number">2</span>;++j)</div><div class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=<span class="number">2</span>;++k)</div><div class="line">					X[i][j]=(X[i][j]+A[i][k]*N[k][j])%<span class="number">10000</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">2</span>;++i)</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=<span class="number">2</span>;++j)	</div><div class="line">				N[i][j]=X[i][j];		</div><div class="line">	&#125;		</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=<span class="number">2</span>;++i)</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=<span class="number">2</span>;++j)</div><div class="line">				<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=<span class="number">2</span>;++k)</div><div class="line">					X[i][j]=(X[i][j]+N[i][k]*N[k][j])%<span class="number">10000</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;=<span class="number">2</span>;++i)</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;=<span class="number">2</span>;++j)	</div><div class="line">				N[i][j]=X[i][j];	</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">qingkong</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	X[<span class="number">1</span>][<span class="number">1</span>]=X[<span class="number">1</span>][<span class="number">2</span>]=X[<span class="number">2</span>][<span class="number">1</span>]=X[<span class="number">2</span>][<span class="number">2</span>]=A[<span class="number">2</span>][<span class="number">2</span>]=N[<span class="number">2</span>][<span class="number">2</span>]=<span class="number">0</span>;</div><div class="line">	A[<span class="number">1</span>][<span class="number">1</span>]=N[<span class="number">1</span>][<span class="number">1</span>]=A[<span class="number">1</span>][<span class="number">2</span>]=N[<span class="number">1</span>][<span class="number">2</span>]=A[<span class="number">2</span>][<span class="number">1</span>]=N[<span class="number">2</span>][<span class="number">1</span>]=<span class="number">1</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">mi</span><span class="params">(<span class="keyword">long</span> <span class="keyword">long</span> n)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(n==<span class="number">1</span>) <span class="keyword">return</span> ;</div><div class="line">	mi(n/<span class="number">2</span>);</div><div class="line">	cheng(<span class="number">1</span>);</div><div class="line">	<span class="keyword">if</span>(n%<span class="number">2</span>) cheng(<span class="number">0</span>);	</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	freopen(<span class="string">"fibonacci.in"</span>,<span class="string">"r"</span>,<span class="built_in">stdin</span>);</div><div class="line">	freopen(<span class="string">"fibonacci.out"</span>,<span class="string">"w"</span>,<span class="built_in">stdout</span>);</div><div class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=t;++i)</div><div class="line">	&#123;</div><div class="line">		<span class="built_in">scanf</span>(<span class="string">"%lld%lld"</span>,&amp;x,&amp;y);<span class="comment">//斐波那契数列中，S(N)=F(N+2)-1</span></div><div class="line">		<span class="keyword">if</span>(x==<span class="number">1</span>) st=<span class="number">0</span>;</div><div class="line">		<span class="keyword">else</span></div><div class="line">		&#123;</div><div class="line">			mi(x<span class="number">-1</span>);</div><div class="line">			st=(N[<span class="number">1</span>][<span class="number">1</span>]+N[<span class="number">2</span>][<span class="number">1</span>]<span class="number">-1</span>)%<span class="number">10000</span>;			</div><div class="line">		&#125;</div><div class="line">		qingkong(); <span class="comment">//数组初始化 </span></div><div class="line">		mi(y);</div><div class="line">		ed=(N[<span class="number">1</span>][<span class="number">1</span>]+N[<span class="number">2</span>][<span class="number">1</span>]<span class="number">-1</span>)%<span class="number">10000</span>;</div><div class="line">		qingkong();<span class="comment">//数组初始化 </span></div><div class="line">		sum=(ed-st)%<span class="number">10000</span>+<span class="number">10000</span>;</div><div class="line">		<span class="built_in">printf</span>(<span class="string">"%lld\n"</span>,sum%<span class="number">10000</span>);		</div><div class="line">	&#125;</div><div class="line"></div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+  </section>
+
+  
+  
+</article>
+
+
+            <footer class="footer">
+
+    <span class="footer__copyright">&copy; 2014-2015. | 由<a href="https://hexo.io/">Hexo</a>强力驱动 | 主题<a href="https://github.com/someus/huno">Huno</a></span>
+    
+</footer>
+        </div>
+    </div>
+
+    <!-- js files -->
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="/js/scale.fix.js"></script>
+    
+
+    
+
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript"> 
+        $(document).ready(function(){
+            MathJax.Hub.Config({ 
+                tex2jax: {inlineMath: [['[latex]','[/latex]'], ['\\(','\\)']]} 
+            });
+        });
+    </script>
+
+
+    
+
+    <script src="/js/awesome-toc.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.awesome_toc({
+                overlay: true,
+                contentId: "post-content",
+            });
+        });
+    </script>
+
+
+    
+    
+    <!--kill ie6 -->
+<!--[if IE 6]>
+  <script src="//letskillie6.googlecode.com/svn/trunk/2/zh_CN.js"></script>
+<![endif]-->
+
+</body>
+</html>
