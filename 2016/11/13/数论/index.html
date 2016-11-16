@@ -34,7 +34,7 @@
 我们可以这样消元：
 
 将L1作为起点，也就是说，我们要通过L1这个式子最终消元后的结果得出x的值，那么就要通过L2，L3将L1中的y，z的系数消为零，同时通过L1将L2，L3中x的系数消为">
-<meta property="og:updated_time" content="2016-11-13T11:25:02.324Z">
+<meta property="og:updated_time" content="2016-11-16T08:36:38.681Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数论 | Criska">
 <meta name="twitter:description" content="1.高斯消元高斯消元法主要用于求一个多元一次方程的解。例如，对于以下的式子：
@@ -179,14 +179,14 @@ classes that you can use:
           
             <font class="categories">
             &#8226; 分类:
-            <a class="categories-link" href="/categories/高斯消元/">高斯消元</a>
+            <a class="categories-link" href="/categories/高斯消元/">高斯消元</a>, <a class="categories-link" href="/categories/高斯消元/扩展欧几里得/">扩展欧几里得</a>
             </font>
           
 
           
              &#8226; 标签:
             <font class="tags">
-              <a class="tags-link" href="/tags/高斯消元/">高斯消元</a>
+              <a class="tags-link" href="/tags/扩展欧几里得/">扩展欧几里得</a>, <a class="tags-link" href="/tags/高斯消元/">高斯消元</a>
             </font>
           
 
@@ -211,10 +211,41 @@ classes that you can use:
 <p>x+y+z=1<br>2x+2y+2z=2<br>3x+3y+3z=3</p>
 </blockquote>
 <ul>
-<li>如何判断无解呢？其实很简单，假如在消元的过程中我们将一个等式等号右边的所有项的系数都消成零了，那其实就意味着这两个等式是完全相等的。而如果这个方程组中有两个意义一样的方程，这就意味着这个方程组一定是无解或者多解。</li>
+<li>如何判断无解呢？其实很简单，假如在消元的过程中我们将一个等式等号左边的所有项的系数都消成零了，那其实就意味着这两个等式是完全相等的。而如果这个方程组中有两个意义一样的方程，这就意味着这个方程组一定是无解或者多解。</li>
 </ul>
 <p>具体代码如下：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">int</span> n,mark=<span class="number">0</span>;</div><div class="line"><span class="keyword">double</span> a[<span class="number">200</span>][<span class="number">200</span>],b[<span class="number">120</span>],da[<span class="number">120</span>];</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n+<span class="number">1</span>;++j)</div><div class="line">		&#123;</div><div class="line">			<span class="built_in">cin</span>&gt;&gt;a[i][j];</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</div><div class="line">	&#123;</div><div class="line">		<span class="keyword">if</span>(mark==<span class="number">1</span>) <span class="keyword">break</span>;</div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=n;++j)</div><div class="line">		&#123;</div><div class="line">			<span class="keyword">if</span>(j==i) <span class="keyword">continue</span>;</div><div class="line">			<span class="keyword">double</span> x=a[j][i]/a[i][i];</div><div class="line">			<span class="keyword">if</span>(x==<span class="number">0</span>) <span class="keyword">continue</span>;</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=n+<span class="number">1</span>;++k)</div><div class="line">			&#123;</div><div class="line">				a[i][k]*=x;</div><div class="line">				a[j][k]=a[i][k]-a[j][k];</div><div class="line">			&#125;</div><div class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">1</span>;k&lt;=n;++k)</div><div class="line">			&#123;</div><div class="line">				<span class="keyword">if</span>(a[j][k]!=<span class="number">0</span>) <span class="keyword">break</span>;</div><div class="line">				<span class="keyword">if</span>(k==n) </div><div class="line">				&#123;</div><div class="line">					mark=<span class="number">1</span>;</div><div class="line">					<span class="keyword">break</span>;</div><div class="line">				&#125;				</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">if</span>(mark==<span class="number">1</span>) <span class="built_in">printf</span>(<span class="string">"No Solution"</span>);</div><div class="line">	<span class="keyword">else</span> </div><div class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i) </div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%.2lf\n"</span>,a[i][n+<span class="number">1</span>]/a[i][i]);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="2-扩展欧几里得算法"><a href="#2-扩展欧几里得算法" class="headerlink" title="2.扩展欧几里得算法"></a>2.扩展欧几里得算法</h1><h3 id="同余方程"><a href="#同余方程" class="headerlink" title="-同余方程"></a><a href="https://www.luogu.org/problem/show?pid=1082" target="_blank" rel="external">-同余方程</a></h3><ul>
+<li>拿noip的这道题做例子，对于 ax ≡ 1 (mod b)，它完全可以转化为ax=yp+1，也就是  ax+(-y)b=1（y是设出来的一个值）<br>显而易见，只要a的系数x=1，只要b的系数是0，这时，我们就会有：a⋅1+b⋅0=gcd(a,b)。这是这个方程的最终结果，而我们需要根据这个结果来推出的初始值。<br>假设我们要求出a,b的最大公因数，自然在下一步已经求到了b和a mod b的最大公因数（递归就是这么反人类。。。由未知找已知），并且求出了一组x1和y1使得：b⋅x1+(a%b)⋅y1=gcd<ul>
+<li>接下来我们可以推出：</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>ax+by=b*x1+(a%b)*y1<br>  设a÷b=c……d<br>  a=b*c+d<br>  d=a-b*c<br>  c=a/b（由于int是整型，我们正好得出整数部分）<br>  d=a-b*(a/b)<br>  所以<br>  ax+by=b*x1+(a%b)*y1<br>  ax+by=b*x1+(a/b)*b*y1<br>  ax+by=a*y1+b*(x1–[a/b]*y1)</p>
+</blockquote>
+<ul>
+<li>x=y1</li>
+<li><p>y=x1–[a/b]*y1</p>
+<p>这样我们就得出了递归的方程。<br>代码如下：</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></div><div class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</div><div class="line"><span class="keyword">int</span> a,b,x,y;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> &amp;x,<span class="keyword">int</span> &amp;y)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(b==<span class="number">0</span>)</div><div class="line">	&#123;</div><div class="line">		x=<span class="number">1</span>;</div><div class="line">		y=<span class="number">0</span>;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">else</span></div><div class="line">	&#123;</div><div class="line">		gcd(b,a%b,x,y);</div><div class="line">		<span class="keyword">int</span> t=x;</div><div class="line">		x=y;</div><div class="line">		y=t-(a/b)*y;		</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></div><div class="line">&#123;</div><div class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;a,&amp;b);</div><div class="line">	gcd(a,b,x,y);<span class="comment">//ax=1(mod b)</span></div><div class="line">	x=x%b;</div><div class="line">	<span class="keyword">if</span>(x&lt;<span class="number">0</span>) x+=b;</div><div class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>,x);</div><div class="line">	<span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="除法取模"><a href="#除法取模" class="headerlink" title="-除法取模"></a>-除法取模</h3><ul>
+<li><p>我们都知道除法不可以直接取模，但是我们可以对除数的逆元进行取模。</p>
+<ul>
+<li>例如 （T/K）%P=(T*K1)%P=(T%P *K1%P)%P<br>其中K1就是K的逆元</li>
+</ul>
+</li>
+<li><p>那么K1该怎么求呢？这里有一个方程：</p>
+<ul>
+<li>K*K1≡1 (mod P)</li>
+</ul>
+<p>显而易见，这是一个同余方程，我们用上面的方法就可以求出了。</p>
+</li>
+</ul>
+
   </section>
 
   
